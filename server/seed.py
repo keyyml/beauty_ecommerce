@@ -52,9 +52,50 @@ if __name__ == '__main__':
             name = "The Chocolates Eyeshadow Palette",
             description = "Shades Row 1: Crater Brown, Beaver, English Walnut Row 2: Crown of Thorns, Di Serria, Roman Coffee",
             price = 12.99,
-            brand = "e.l.f.",
+            brand = "Juvia's Place",
+            image = "insert url"
+        ))
+
+        products_to_add.append(Product(
+            id = 3,
+            name = "Goof Proof Waterproof Easy Shape & Fill Eyebrow Pencil",
+            description = "Shade: 3.5 Natural Medium Brown",
+            price = 26.00,
+            brand = "Benefit Cosmetics",
             image = "insert url"
         ))
 
         db.session.add_all(products_to_add)
         db.session.commit()
+
+        reviews_to_add = []
+
+        reviews_to_add.append(Review(
+            id = 1,
+            product_id = 2,
+            user_id = 3,
+            rating = 7,
+            comment = "I Loved this product it made my routine so much better!"
+        ))
+
+        reviews_to_add.append(Review(
+            id = 2,
+            product_id = 1,
+            user_id = 2,
+            rating = 9,
+            comment = "The shades are amazing!"
+        ))
+
+        reviews_to_add.append(Review(
+            id = 3,
+            product_id = 3,
+            user_id = 1,
+            rating = 8,
+            comment = "This is such a great addition to my makeup collection!"
+        ))
+
+        db.session.add_all(reviews_to_add)
+        db.session.commit()
+
+        orders_to_add = []
+

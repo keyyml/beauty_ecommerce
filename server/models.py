@@ -35,7 +35,7 @@ class User(db.Model, SerializerMixin):
         return email
 
     def __repr__(self):
-        return f'<User {self.id} {self.username} {self.email}'
+        return f'<User id: {self.id} username: {self.username} email: {self.email}'
     
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
@@ -46,21 +46,24 @@ class Review(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
 
+    product = db.relationship('Product', backref='reviews')
+    user = db.relationship('User', backref='reviews')
+
     def __repr__(self):
-        return f'<Review {self.id} {self.rating} {self.comment} {self.user_id} {self.product_id}>'
+        return f'<Review id: {self.id} rating: {self.rating}/10 comment: {self.comment} user_id: {self.user_id} product_id: {self.product_id}>'
     
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    description = db.Column(db.String)
+    color = db.Column(db.String)
     price = db.Column(db.Integer)
     brand = db.Column(db.String)
     image = db.Column(db.String)
 
     def __repr__(self):
-        return f'<Product {self.id} {self.name} {self.description} {self.price} {self.brand}>'
+        return f'<Product id: {self.id} name: {self.name} description: {self.color} price: {self.price} brand: {self.brand}>'
     
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
@@ -69,8 +72,10 @@ class Order(db.Model, SerializerMixin):
     status = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+    user = db.relationship('User', backref='orders')
+
     def __repr__(self):
-        return f'<Order {self.id} {self.status} {self.user_id} >'
+        return f'<Order id: {self.id} status: {self.status} user_id: {self.user_id} >'
     
 class OrderItem(db.Model, SerializerMixin):
     __tablename__ = 'order_items'
@@ -80,8 +85,11 @@ class OrderItem(db.Model, SerializerMixin):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
 
+    order = db.relationship('Order', backref='order_items')
+    product = db.relationship('Product', backref='products')
+
     def __repr__(self):
-        return f'<OrderItem {self.id} {self.quantity} {self.product_id} {self.order_id}>'
+        return f'<OrderItem id: {self.id} quantity: {self.quantity} product_id: {self.product_id} order_id: {self.order_id}>'
     
 class Category(db.Model, SerializerMixin):
     __tablename__ = 'categories'
@@ -91,7 +99,7 @@ class Category(db.Model, SerializerMixin):
     description = db.Column(db.String)
 
     def __repr__(self):
-        return f'<Category {self.id} {self.name} {self.description} >'
+        return f'<Category id: {self.id} name: {self.name} description: {self.description} >'
     
 class ProductCategory(db.Model, SerializerMixin):
     __tablename__ = 'product_categories'
@@ -101,4 +109,4 @@ class ProductCategory(db.Model, SerializerMixin):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     def __repr__(self):
-        return f'<Category {self.product_id} {self.category_id}>'
+        return f'<Category id: {self.product_id} category_id: {self.category_id}>'
