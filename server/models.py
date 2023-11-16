@@ -14,7 +14,7 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
     email = db.Column(db.String)
-    password = db.Column(db.string)
+    password = db.Column(db.String)
 
     @validates('username')
     def validate_username(self, key, username):
@@ -56,7 +56,8 @@ class Product(db.Model, SerializerMixin):
     name = db.Column(db.String)
     description = db.Column(db.String)
     price = db.Column(db.Integer)
-    brand = db.Column(db.String)   
+    brand = db.Column(db.String)
+    image = db.Column(db.String)
 
     def __repr__(self):
         return f'<Product {self.id} {self.name} {self.description} {self.price} {self.brand}>'
@@ -76,12 +77,11 @@ class OrderItem(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer)
-    price = db.Column(db.Integer)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
 
     def __repr__(self):
-        return f'<OrderItem {self.id} {self.quantity} {self.price} {self.product_id} {self.order_id}>'
+        return f'<OrderItem {self.id} {self.quantity} {self.product_id} {self.order_id}>'
     
 class Category(db.Model, SerializerMixin):
     __tablename__ = 'categories'
@@ -96,6 +96,7 @@ class Category(db.Model, SerializerMixin):
 class ProductCategory(db.Model, SerializerMixin):
     __tablename__ = 'product_categories'
 
+    id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 

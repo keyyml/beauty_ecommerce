@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 
 # make the connection to the DB through SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///store.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///beauty.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
