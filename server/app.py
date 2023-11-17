@@ -1,4 +1,5 @@
 from config import app
+from routes.user_routes import users
 
 @app.route('/')
 def index():

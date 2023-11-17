@@ -12,15 +12,22 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
+    first_name = db.Column(db.String)
+    last_name = db.Column(db.String)
     email = db.Column(db.String)
     password = db.Column(db.String)
 
-    @validates('username')
-    def validate_username(self, key, username):
-        if not username:
-            raise ValueError("User must have a username")
-        return username
+    @validates('last_name')
+    def validate_last_name(self, key, last_name):
+        if not last_name:
+            raise ValueError("User must have a last_name")
+        return last_name
+    
+    @validates('first_name')
+    def validate_first_name(self, key, first_name):
+        if not first_name:
+            raise ValueError("User must have a first name")
+        return first_name
     
     @validates('password')
     def validate_password(self, key, password):
@@ -35,7 +42,7 @@ class User(db.Model, SerializerMixin):
         return email
 
     def __repr__(self):
-        return f'<User id: {self.id} username: {self.username} email: {self.email}'
+        return f'<User id: {self.id} name: {self.first_name} {self.last_name} email: {self.email}'
     
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
@@ -86,7 +93,7 @@ class OrderItem(db.Model, SerializerMixin):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
 
     order = db.relationship('Order', backref='order_items')
-    product = db.relationship('Product', backref='products')
+    product = db.relationship('Product', backref='order_items')
 
     def __repr__(self):
         return f'<OrderItem id: {self.id} quantity: {self.quantity} product_id: {self.product_id} order_id: {self.order_id}>'
@@ -107,6 +114,9 @@ class ProductCategory(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+
+    product = db.relationship('Product', backref='product_categories')
+    category = db.relationship('Category', backref='product_categories')
 
     def __repr__(self):
         return f'<Category id: {self.product_id} category_id: {self.category_id}>'
