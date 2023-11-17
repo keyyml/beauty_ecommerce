@@ -11,6 +11,8 @@ db = SQLAlchemy(metadata=metadata)
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
+    serialize_rules = ('-reviews.user', '-orders.user', '-orders.order_items')
+
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
@@ -47,6 +49,8 @@ class User(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
+    serialize_rules = ('-user.orders', '-product.reviews', '-product.order_items', '-product.product_categories', '-user.reviews')
+
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
@@ -62,6 +66,8 @@ class Review(db.Model, SerializerMixin):
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
 
+    serialize_rules = ('-product_categories.product', '-order_items', '-reviews.product', '-user.password', '-product_categories.category')
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     color = db.Column(db.String)
@@ -75,6 +81,8 @@ class Product(db.Model, SerializerMixin):
 class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
+    serialize_rules = ('-user.orders','-order_items.order', '-user.reviews', '-user.password' )
+
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -86,6 +94,8 @@ class Order(db.Model, SerializerMixin):
     
 class OrderItem(db.Model, SerializerMixin):
     __tablename__ = 'order_items'
+
+    serialize_rules = ('-order', '-product.order_items', '-product.product_categories', '-product.reviews')
 
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer)
@@ -101,6 +111,8 @@ class OrderItem(db.Model, SerializerMixin):
 class Category(db.Model, SerializerMixin):
     __tablename__ = 'categories'
 
+    serialize_rules = ('-product_categories', )
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
@@ -110,6 +122,8 @@ class Category(db.Model, SerializerMixin):
     
 class ProductCategory(db.Model, SerializerMixin):
     __tablename__ = 'product_categories'
+
+    serialize_rules = ('-product.product_categories', '-category.product_categories', '-product.reviews')
 
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
