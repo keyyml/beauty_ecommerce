@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 
-    const [productsArray, setProductsArray] = useState([])
+    // const [productsArray, setProductsArray] = useState([])
 
-    useEffect(() => {
-        fetch("/products")
-        .then(resp=>resp.json())
-        .then((data)=>{
-            // console.log(data)
-            setProductsArray(data)
-        })
-    }, [])
+    // useEffect(() => {
+    //     fetch("/products")
+    //     .then(resp=>resp.json())
+    //     .then((data)=>{
+    //         // console.log(data)
+    //         setProductsArray(data)
+    //     })
+    // }, [])
 
         const productsToDisplay = productsArray.map((product) => {
             return (

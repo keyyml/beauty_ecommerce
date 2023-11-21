@@ -178,6 +178,12 @@ if __name__ == '__main__':
             description = "null"
         ))
 
+        categories_to_add.append(Category(
+            id = 6,
+            name = "Skincare",
+            description = "null"
+        ))
+
         db.session.add_all(categories_to_add)
         db.session.commit()
 
