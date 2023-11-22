@@ -4,7 +4,7 @@ function Categories(){
 
     return(
         <>
-        </>
+        </>  
     )
 }
 

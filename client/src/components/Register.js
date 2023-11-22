@@ -1,23 +1,23 @@
-import React from 'react';
-import axios from 'axios';
+import React from 'react'
+import axios from 'axios'
 
 function Register(){
     
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const first_name = e.target.first_name.value;
-        const last_name = e.target.last_name.value;
+        e.preventDefault()
+        const email = e.target.email.value
+        const password = e.target.password.value
+        const first_name = e.target.first_name.value
+        const last_name = e.target.last_name.value
     
         try {
-          await axios.post('/register', { email, password, first_name, last_name });
+          await axios.post('/register', { email, password, first_name, last_name })
           e.target.reset()
         } catch (error) {
-          console.error('Error during registration:', error);
+          console.error('Error during registration:', error)
         }
 
-    };
+    }
     
     return (
         <div>
@@ -34,8 +34,8 @@ function Register(){
             <button type="submit">Submit</button>
           </form>
         </div>
-    );
-};
+    )
+}
     
 
 export default Register

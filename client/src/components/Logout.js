@@ -5,10 +5,10 @@ function Logout() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('/logout');
+      await axios.get('/logout')
       console.log("logout success")
     } catch (error) {
-      console.error('Error during logout:', error);
+      console.error('Error during logout:', error)
     }
   }
 

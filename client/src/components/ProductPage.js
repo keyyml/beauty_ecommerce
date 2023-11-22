@@ -11,7 +11,7 @@ const [productsArray, setProductsArray] = useState([])
             // console.log(data)
             setProductsArray(data)
         })
-    }, [])
+    }, [])  
 
     const productsToDisplay = productsArray.map((product) => {
         return (

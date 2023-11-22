@@ -4,17 +4,17 @@ import axios from "axios";
 function Login(){
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+        e.preventDefault()
+        const email = e.target.email.value
+        const password = e.target.password.value
     
         try {
-          await axios.post('/login', { email, password });
+          await axios.post('/login', { email, password })
           e.target.reset()
         } catch (error) {
-          console.error('Error during login:', error);
+          console.error('Error during login:', error)
         }
-    };
+    }
     
     return (
         <div>
@@ -27,7 +27,7 @@ function Login(){
             <button type="submit">Submit</button>
           </form>
         </div>
-    );
+    )
 }
 
 export default Login

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 function Search(){
 
@@ -7,7 +7,7 @@ function Search(){
             <label htmlFor="search">Search:</label>
             <input
                 type="text"
-                id="search"
+                id="search" 
                 placeholder="search..."
             />
         </>
