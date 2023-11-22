@@ -2,7 +2,7 @@ from models import db, User
 from config import app, login_manager
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, url_for, redirect, jsonify, make_response
-from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 
 
 @app.route('/users', methods = ['GET'])
@@ -37,6 +37,13 @@ def user_by_id(id):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+@app.route("/profile", methods = ['GET'])
+@login_required
+def profile():
+    if request.method == 'GET':
+        return make_response(current_user.to_dict(), 200)
+
+
 @app.route('/register', methods=["POST"])
 def register():
     if request.method == "POST":
@@ -46,7 +53,7 @@ def register():
         db.session.commit()
         return jsonify(message="Registration successful")
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=['GET', "POST"])
 def login():
     if request.method == "POST":
         data = request.get_json()
@@ -54,8 +61,13 @@ def login():
         if user and user.password == data['password']:
             login_user(user)
             return jsonify(message="Login successful")
+        return jsonify(message="Login failed"), 401
+    if current_user.is_authenticated:
+        return jsonify(message="GET successful")
+    
+    return jsonify(message="Login page")
+    
 
-    return jsonify(message="Login failed"), 401
 
 @app.route("/logout")
 def logout():
