@@ -1,6 +1,8 @@
-from flask import Flask
 from models import db
 from flask_migrate import Migrate
+from flask import Flask, request, url_for, redirect, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 
 
 app = Flask(__name__)
@@ -10,8 +12,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///beauty.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Enter a secret key
+app.config["SECRET_KEY"] = "Azula"
+
 # create our migration using our db
 migrate = Migrate(app, db)
 
 # initialize the flask app
 db.init_app(app)
+
+
