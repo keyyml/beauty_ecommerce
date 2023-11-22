@@ -3,12 +3,13 @@ from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
+from flask_login import UserMixin
 
 convention = {"fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s"}
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
-class User(db.Model, SerializerMixin):
+class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = 'users'
 
     serialize_rules = ('-reviews.user', '-orders.user', '-orders.order_items')

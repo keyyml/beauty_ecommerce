@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Search from './Search';
+import Logout from './Logout';
+import Search from './Search'
 
 function NavBar() {
 
@@ -11,6 +12,8 @@ function NavBar() {
             <li><NavLink to="/cart">Cart</NavLink></li>
             <li><NavLink to="/login">Login</NavLink></li>
             <li><NavLink to="/register">Register</NavLink></li>
+            <Search />
+            <Logout />
         </div>
     </>
     )
