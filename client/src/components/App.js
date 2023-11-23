@@ -6,10 +6,13 @@ import Register from "./Register";
 import Login from "./Login";
 import Logout from "./Logout";
 import User from "./User";
+import HomePage from "./HomePage"
+import Categories from "./Categories";
 
 function App() {
 
     const [userProfile, setUserProfile] = useState({})
+    const [productsArray, setProductsArray] = useState([])
 
     useEffect(() => {
         fetch("/profile")
@@ -17,8 +20,16 @@ function App() {
         .then ((data) => setUserProfile(data))
     }, [])
 
-    console.log(userProfile)
+    // console.log(userProfile)
 
+    useEffect(() => {
+        fetch("/products")
+        .then(resp => resp.json())
+        .then((data) => setProductsArray(data))
+    }, [])
+
+    // console.log(productsArray)
+    
 
 
     return (
@@ -26,6 +37,8 @@ function App() {
             <NavBar />
             <Switch>
                 <Route exact path="/">
+                    <HomePage productsArray = {productsArray} />
+                    <Categories />
                 </Route>
                 <Route exact path="/cart">
                     <Cart />
