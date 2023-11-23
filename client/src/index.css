@@ -1,6 +1,6 @@
-*{
-  box-sizing: border-box;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 body {
   font-family: Arial;
@@ -12,18 +12,6 @@ body {
   background-attachment: fixed;
 }
 
-/* Header/Blog Title */
-.header {
-  padding: 30px;
-  text-align: center;
-  background: white;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
-.header h1 {
-  font-size: 50px;
-}
 
 /* Style the top navigation bar */
 .topnav {
@@ -31,10 +19,6 @@ body {
   background-color: #333;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-}
-
-.this-htag {
-  text-align: center;
 }
 
 /* Style the topnav links */
@@ -58,87 +42,6 @@ body {
   color: black;
 }
 
-.topnav input {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.topnav label {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 70%; 
-  margin-left: 20px; 
-  /* overflow-y: scroll;Add margin to the right side to create space */
-}
-.scrollable-content {
-  max-height: 300px; 
-  overflow-y: scroll; 
-}
-
-.rightcolumn {
-  margin-top: 20px;
-  float: left;
-  width: 25%;
-  background-color: #f1f1f1;
-  padding-left: 20px;
-  margin-left: 20px;
-  border-radius: 10px;
-  /* overflow-y: scroll; */
-}
-
-/* Fake image */
-.contentbox {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-  margin-right: 20px;
-  border-radius: 10px;
-}
-
-.storecontentbox {
-  background-color: #aaa;
-  width: 100%;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 40px;
-  margin-right: 20px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-/* .storecontentbox Hover Effect */
-.storecontentbox:hover {
-  text-decoration: underline;
-}
-
-.storecontentbox:active {
-  text-decoration: none;
-}
-
-.prod-contentbox {
-  background-color: #aaa;
-  width: 100%;
-  padding: 40px;
-  margin-right: 20px;
-  border-radius: 10px;
-}
-
-/* Add a card effect for articles */
 .card {
   background-color: white;
   padding: 20px;
@@ -147,74 +50,3 @@ body {
   border-radius: 10px;
 }
 
-/* Clear floats after the columns */
-.row::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-}
-
-.input-text {
-  height: 2rem;
-  width: 90%;
-  font-size: 12px;
-  margin: 3px;
-}
-
-label {
-  font-size: large;
-}
-
-.buttons {
-  margin-left: 80px;
-  height: 2rem;
-  width: 60%;
-  color: rgb(2, 2, 2);
-  font-size: 12px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.addbutton {
-  height: 2rem;
-  width: 90%;
-  color: rgb(2, 2, 2);
-  font-size: 22px;
-  margin-top: 20px;
-  margin-left: 10px;
-  background-color: #5f7afe;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.cardbuttons {
-  float: right;
-  height: 2rem;
-  width: auto;
-  color: rgb(2, 2, 2);
-  font-size: 12px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-/* Button Hover Effects */
-.cardbuttons:hover {
-  background-color: #304cd8;
-}
-
-.addbutton:hover {
-  background-color: #304cd8;
-}
-
-.buttons:hover {
-  background-color: #304cd8;
-}
