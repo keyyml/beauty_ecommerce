@@ -8,16 +8,18 @@ function NavBar() {
 
 
     return(
-    <>  
-        <div className = "topnav">
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/cart">Cart</NavLink></li>
-            <li><NavLink to="/login">Login</NavLink></li>
-            <li><NavLink to="/register">Register</NavLink></li>
+    <div className="w-full"> 
+        <span className= "flex justify-evenly space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100" >
+            <span className=''><NavLink to="/">Home</NavLink></span>
+            <span><NavLink to="/cart">Cart</NavLink></span>
+            <span><NavLink to="/login">Login</NavLink></span>
             <Search />
+            <div className='flex'>
+            <span><NavLink to="/register">Register</NavLink></span>
+            </div>
             <Logout />
-        </div>
-    </>
+        </span>
+    </div>
     )
 }
 
