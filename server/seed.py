@@ -180,7 +180,19 @@ if __name__ == '__main__':
 
         categories_to_add.append(Category(
             id = 6,
-            name = "Skincare",
+            name = "Skin Care",
+            description = "null"
+        ))
+
+        categories_to_add.append(Category(
+            id = 7,
+            name = "Hair Care",
+            description = "null"
+        ))
+
+        categories_to_add.append(Category(
+            id = 8,
+            name = "Makeup",
             description = "null"
         ))
 
@@ -211,6 +223,24 @@ if __name__ == '__main__':
             id = 4,
             product_id = 3,
             category_id = 2
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 5,
+            product_id = 1,
+            category_id = 8
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 6,
+            product_id = 2,
+            category_id = 8
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 7,
+            product_id = 3,
+            category_id = 8
         ))
 
         db.session.add_all(product_categories_to_add)

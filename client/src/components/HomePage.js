@@ -13,7 +13,6 @@ function HomePage({ productsArray }) {
 
     return (
         <>
-            <Banner />
             {productsToDisplay}
         </>
     )

@@ -4,7 +4,7 @@ function CategoryPage({name}){
 
     return(
         <>
-            <button>{name}</button>
+            <h1>IT WORKED AHAHA</h1>
         </>
     )
 }

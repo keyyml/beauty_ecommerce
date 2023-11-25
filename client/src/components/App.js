@@ -8,6 +8,8 @@ import Logout from "./Logout";
 import User from "./User";
 import HomePage from "./HomePage"
 import Categories from "./Categories";
+import Banner from "./Banner";
+import CategoryPage from "./CategoryPage";
 
 function App() {
 
@@ -37,8 +39,12 @@ function App() {
             <NavBar />
             <Switch>
                 <Route exact path="/">
-                    <HomePage productsArray = {productsArray} />
+                    <Banner />
                     <Categories />
+                    <HomePage productsArray = {productsArray} />
+                </Route>
+                <Route exact path="/categorypage">
+                    <CategoryPage />
                 </Route>
                 <Route exact path="/cart">
                     <Cart />
