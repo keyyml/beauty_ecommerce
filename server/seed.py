@@ -72,6 +72,42 @@ if __name__ == '__main__':
             image = "insert url"
         ))
 
+        products_to_add.append(Product(
+            id = 4,
+            name = "Rosemary Mint Scalp & Hair Strengthening Oil",
+            color = "none",
+            price = 7.69,
+            brand = "Mielle",
+            image = "insert url"
+        ))
+
+        products_to_add.append(Product(
+            id = 5,
+            name = "No.7 Bonding Oil",
+            color = "none",
+            price = 30.00,
+            brand = "OLAPLEX",
+            image = "insert url"
+        ))
+
+        products_to_add.append(Product(
+            id = 6,
+            name = "Ceramide Retinol + HPR Rapid Skin Renewing Water Cream",
+            color = "none",
+            price = 92.00,
+            brand = "Elizabeth Arden",
+            image = "insert url"
+        ))
+
+        products_to_add.append(Product(
+            id = 7,
+            name = "Moisturizing Cream with Hyaluronic Acid for Balanced to Dry Skin",
+            color = "none",
+            price = 17.99,
+            brand = "CeraVe",
+            image = "insert url"
+        ))
+
         db.session.add_all(products_to_add)
         db.session.commit()
 
@@ -241,6 +277,30 @@ if __name__ == '__main__':
             id = 7,
             product_id = 3,
             category_id = 8
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 8,
+            product_id = 4,
+            category_id = 7
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 9,
+            product_id = 5,
+            category_id = 7
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 10,
+            product_id = 6,
+            category_id = 6
+        ))
+
+        product_categories_to_add.append(ProductCategory(
+            id = 11,
+            product_id = 7,
+            category_id = 6
         ))
 
         db.session.add_all(product_categories_to_add)
