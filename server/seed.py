@@ -50,7 +50,7 @@ if __name__ == '__main__':
             color = "Shade: Turks and Caicos",
             price = 7.99,
             brand = "e.l.f.",
-            image = "insert url"
+            image = "URL"
 
         ))
 
@@ -60,7 +60,7 @@ if __name__ == '__main__':
             color = "Shades Row 1: Crater Brown, Beaver, English Walnut Row 2: Crown of Thorns, Di Serria, Roman Coffee",
             price = 12.99,
             brand = "Juvia's Place",
-            image = "insert url"
+            image = "URL"
         ))
 
         products_to_add.append(Product(
@@ -69,7 +69,7 @@ if __name__ == '__main__':
             color = "Shade: 3.5 Natural Medium Brown",
             price = 26.00,
             brand = "Benefit Cosmetics",
-            image = "insert url"
+            image = "URL"
         ))
 
         products_to_add.append(Product(
@@ -78,7 +78,7 @@ if __name__ == '__main__':
             color = "none",
             price = 7.69,
             brand = "Mielle",
-            image = "insert url"
+            image = "URL"
         ))
 
         products_to_add.append(Product(
@@ -87,7 +87,7 @@ if __name__ == '__main__':
             color = "none",
             price = 30.00,
             brand = "OLAPLEX",
-            image = "insert url"
+            image = "URL"
         ))
 
         products_to_add.append(Product(
@@ -96,7 +96,7 @@ if __name__ == '__main__':
             color = "none",
             price = 92.00,
             brand = "Elizabeth Arden",
-            image = "insert url"
+            image = "URL"
         ))
 
         products_to_add.append(Product(
@@ -105,7 +105,7 @@ if __name__ == '__main__':
             color = "none",
             price = 17.99,
             brand = "CeraVe",
-            image = "insert url"
+            image = "URL"
         ))
 
         db.session.add_all(products_to_add)

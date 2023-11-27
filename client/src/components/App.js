@@ -17,6 +17,7 @@ function App() {
 
     const [userProfile, setUserProfile] = useState({})
     const [productsArray, setProductsArray] = useState([])
+    const [prodCatArr, setProdCatArr] = useState([])
 
     useEffect(() => {
         fetch("/profile")
@@ -32,10 +33,7 @@ function App() {
         .then((data) => setProductsArray(data))
     }, [])
 
-    // console.log(productsArray)
     
-
-
     return (
         <div className="App">
             <NavBar />
@@ -46,7 +44,7 @@ function App() {
                     <HomePage productsArray = {productsArray} />
                 </Route>
                 <Route exact path="/makeup-page">
-                    <MakeupPage />
+                    <MakeupPage productsArray = {productsArray} prodCatArr = {prodCatArr}/>
                 </Route>
                 <Route exact path="/hair-page">
                     <HairPage />
