@@ -71,8 +71,11 @@ def login():
 
 @app.route("/logout")
 def logout():
-    logout_user()
-    return jsonify(message="Logout successful")
+    if current_user.is_authenticated:
+        logout_user()
+        return jsonify(message="Logout successful")
+    else:
+        return jsonify(message="Logout unavailable")
 
 if __name__ == "__main__":
     app.run()
