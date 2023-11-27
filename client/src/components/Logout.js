@@ -8,8 +8,13 @@ function Logout() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('/logout')
-      console.log("logout success")
+      const response = await axios.get('/logout')
+      const { message } = response.data
+      if (message === "Logout successful") {
+        console.log("logout success")
+      } else if (message === "Logout unavailable") {
+        console.log("Logout unavailable")
+      }
       history.push("/")
     } catch (error) {
       console.error('Error during logout:', error)
