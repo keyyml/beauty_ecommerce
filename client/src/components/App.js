@@ -9,7 +9,9 @@ import User from "./User";
 import HomePage from "./HomePage"
 import Categories from "./Categories";
 import Banner from "./Banner";
-import CategoryPage from "./CategoryPage";
+import MakeupPage from "./MakeupPage";
+import HairPage from "./HairPage";
+import SkinPage from "./SkinPage";
 
 function App() {
 
@@ -43,8 +45,14 @@ function App() {
                     <Categories />
                     <HomePage productsArray = {productsArray} />
                 </Route>
-                <Route exact path="/categorypage">
-                    <CategoryPage />
+                <Route exact path="/makeup-page">
+                    <MakeupPage />
+                </Route>
+                <Route exact path="/hair-page">
+                    <HairPage />
+                </Route>
+                <Route exact path="/skin-page">
+                    <SkinPage />
                 </Route>
                 <Route exact path="/cart">
                     <Cart />
