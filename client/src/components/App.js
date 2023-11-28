@@ -25,7 +25,7 @@ function App() {
         .then ((data) => setUserProfile(data))
     }, [])
 
-    // console.log(userProfile)
+    console.log(userProfile)
 
     useEffect(() => {
         fetch("/products")

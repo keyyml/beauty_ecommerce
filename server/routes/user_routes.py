@@ -1,4 +1,4 @@
-from models import db, User
+from models import db, User, Product, Order, OrderItem
 from config import app, login_manager
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, url_for, redirect, jsonify, make_response
@@ -65,7 +65,7 @@ def login():
     if current_user.is_authenticated:
         return jsonify(message="GET successful")
     
-    return jsonify(message="Login page")
+    return jsonify(message="NO user")
     
 
 
@@ -76,6 +76,49 @@ def logout():
         return jsonify(message="Logout successful")
     else:
         return jsonify(message="Logout unavailable")
+    
+    
+@app.route('/add_to_order/<int:product_id>', methods=['POST'])
+@login_required
+def add_to_order(product_id):
+    user = current_user
+
+    product = Product.query.get(product_id)
+
+    if product:
+        # Check if the user has an open order, create one if not
+        if not user.orders or user.orders[-1].status != 'open':
+            order = Order(status='open', user=user)
+            db.session.add(order)
+            db.session.commit()
+        else:
+            order = user.orders[-1]
+
+        # Add the product to the order
+        order_item = OrderItem(quantity=1, product=product, order=order)
+        db.session.add(order_item)
+        db.session.commit()
+
+        return jsonify(message="Product added to order successfully"), 200
+    else:
+        return jsonify(message="Product not found"), 404
+
+@app.route('/checkout', methods=['GET'])
+@login_required
+def checkout():
+    user = current_user
+
+    # Check if the user has an open order
+    if user.orders and user.orders[-1].status == 'open':
+        order = user.orders[-1]
+
+        # Calculate the total price of the order
+        total_price = sum(item.product.price * item.quantity for item in order.order_items)
+
+        return jsonify(order_id=order.id, total_price=total_price, items=[item.product.to_dict() for item in order.order_items]), 200
+    else:
+        return jsonify(message="No open order found"), 404
+
 
 if __name__ == "__main__":
     app.run()
