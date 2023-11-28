@@ -78,44 +78,61 @@ def logout():
         return jsonify(message="Logout unavailable")
     
     
+from flask import jsonify
+
+# ...
+
 @app.route('/add_to_order/<int:product_id>', methods=['POST'])
 @login_required
 def add_to_order(product_id):
     user = current_user
-
     product = Product.query.get(product_id)
 
     if product:
-        # Check if the user has an open order, create one if not
-        if not user.orders or user.orders[-1].status != 'open':
-            order = Order(status='open', user=user)
-            db.session.add(order)
-            db.session.commit()
-        else:
-            order = user.orders[-1]
+        open_order = Order.query.filter(Order.user == user, Order.status == 'open').first()
 
-        # Add the product to the order
-        order_item = OrderItem(quantity=1, product=product, order=order)
-        db.session.add(order_item)
+        if not open_order:
+            open_order = Order(status='open', user=user)
+            db.session.add(open_order)
+            db.session.commit()
+
+        existing_item = OrderItem.query.filter_by(order_id=open_order.id, product_id=product.id).first()
+
+        if existing_item:
+            existing_item.quantity += 1
+        else:
+            order_item = OrderItem(quantity=1, product=product, order=open_order)
+            db.session.add(order_item)
+
         db.session.commit()
 
         return jsonify(message="Product added to order successfully"), 200
     else:
         return jsonify(message="Product not found"), 404
 
+    
 @app.route('/checkout', methods=['GET'])
 @login_required
 def checkout():
     user = current_user
+    open_order = Order.query.filter(Order.user == user, Order.status == 'open').first()
 
-    # Check if the user has an open order
-    if user.orders and user.orders[-1].status == 'open':
-        order = user.orders[-1]
+    if open_order:
+        total_price = sum(item.product.price * item.quantity for item in open_order.order_items)
 
-        # Calculate the total price of the order
-        total_price = sum(item.product.price * item.quantity for item in order.order_items)
+        response_data = {
+            'order_id': open_order.id,
+            'total_price': total_price,
+            'items': [
+                {
+                    'product': item.product.to_dict(),
+                    'quantity': item.quantity
+                }
+                for item in open_order.order_items
+            ]
+        }
 
-        return jsonify(order_id=order.id, total_price=total_price, items=[item.product.to_dict() for item in order.order_items]), 200
+        return jsonify(response_data), 200
     else:
         return jsonify(message="No open order found"), 404
 

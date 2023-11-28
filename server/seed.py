@@ -145,19 +145,19 @@ if __name__ == '__main__':
         orders_to_add.append(Order(
             id = 1,
             user_id = 2,
-            status = "Pending"
+            status = "open"
         ))
 
         orders_to_add.append(Order(
             id = 2,
             user_id = 1,
-            status = "Shipped"
+            status = "open"
         ))
 
         orders_to_add.append(Order(
             id = 3,
             user_id = 3,
-            status = "Delivered"
+            status = "open"
         ))
 
         db.session.add_all(orders_to_add)
