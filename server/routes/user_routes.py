@@ -96,10 +96,11 @@ def add_to_order(product_id):
             db.session.add(open_order)
             db.session.commit()
 
+        quantity = request.json.get('quantity', 1)
         existing_item = OrderItem.query.filter_by(order_id=open_order.id, product_id=product.id).first()
 
         if existing_item:
-            existing_item.quantity += 1
+            existing_item.quantity += quantity
         else:
             order_item = OrderItem(quantity=1, product=product, order=open_order)
             db.session.add(order_item)
@@ -135,6 +136,32 @@ def checkout():
         return jsonify(response_data), 200
     else:
         return jsonify(message="No open order found"), 404
+    
+@app.route('/update_quantity/<int:product_id>', methods=['POST'])
+@login_required
+def update_quantity(product_id):
+    new_quantity = request.json.get('quantity', 1)
+
+    order_item = OrderItem.query.filter_by(product_id=product_id).first()
+    if order_item:
+        order_item.quantity = new_quantity
+        db.session.commit()
+
+        return jsonify(message="Quantity updated successfully"), 200
+    else:
+        return jsonify(message="Item not found"), 404
+
+@app.route('/remove_item/<int:product_id>', methods=['POST'])
+@login_required
+def remove_item(product_id):
+    order_item = OrderItem.query.filter_by(product_id=product_id).first()
+    if order_item:
+        db.session.delete(order_item)
+        db.session.commit()
+
+        return jsonify(message="Item removed successfully"), 200
+    else:
+        return jsonify(message="Item not found"), 404
 
 
 if __name__ == "__main__":

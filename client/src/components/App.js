@@ -12,6 +12,7 @@ import Banner from "./Banner";
 import MakeupPage from "./MakeupPage";
 import HairPage from "./HairPage";
 import SkinPage from "./SkinPage";
+import ProductPage from "./ProductPage";
 
 function App() {
 
@@ -66,6 +67,9 @@ function App() {
                 </Route>
                 <Route exact path="/profile">
                     <User user = {userProfile}/>
+                </Route>
+                <Route exact path="/product-page">
+                    <ProductPage />
                 </Route>
             </Switch>
         </div>

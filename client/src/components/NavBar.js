@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logout from './Logout';
 import Search from './Search'
