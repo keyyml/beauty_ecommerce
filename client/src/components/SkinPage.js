@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import axios from "axios";
 
 
-function SkinPage(){
+function SkinPage({updateCart}){
 
     const [prodsArr, setProdsArr] = useState([]);
 
@@ -24,7 +24,7 @@ function SkinPage(){
 
     const prodsToDisplay = prodsArr.map((product) => {
         return(
-            <ProductCard key={product.id} {...product} />
+            <ProductCard key={product.id} {...product} updateCart={updateCart}/>
         )
     })
 

@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Cart() {
-  const [orderDetails, setOrderDetails] = useState(null);
-
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const response = await axios.get("/checkout");
-        setOrderDetails(response.data);
-      } catch (error) {
-        console.error("Error fetching order details:", error);
-      }
-    };
-
-    fetchOrderDetails();
-  }, []);
+function Cart({ orderDetails, fetchOrderDetails }) {
+  
    
   const updateQuantity = async (productId, newQuantity) => {
     try {
       await axios.post(`/update_quantity/${productId}`, { quantity: newQuantity })
-      const response = await axios.get("/checkout")
-      setOrderDetails(response.data)
+      fetchOrderDetails()
     } catch (error) {
       console.error("Error updating quantity:", error)
     }
@@ -31,7 +17,7 @@ function Cart() {
     try {
       await axios.post(`/remove_item/${productId}`)
       const response = await axios.get("/checkout")
-      setOrderDetails(response.data)
+      fetchOrderDetails()
     } catch (error) {
       console.error("Error removing item:", error)
     }

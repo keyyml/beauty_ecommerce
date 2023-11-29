@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Switch, Route } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Cart from "./Cart";
@@ -19,6 +20,7 @@ function App() {
     const [userProfile, setUserProfile] = useState({})
     const [productsArray, setProductsArray] = useState([])
     const [prodCatArr, setProdCatArr] = useState([])
+    const [orderDetails, setOrderDetails] = useState(null)
 
     useEffect(() => {
         fetch("/profile")
@@ -34,7 +36,28 @@ function App() {
         .then((data) => setProductsArray(data))
     }, [])
 
-    
+    const fetchOrderDetails = async () => {
+      try {
+        const response = await axios.get("/checkout")
+        setOrderDetails(response.data)
+      } catch (error) {
+        console.error("Error fetching order details:", error)
+      }
+    }
+  
+    useEffect(() => {
+      fetchOrderDetails();
+    }, []);
+  
+    const updateCart = async (productId, newQuantity) => {
+      try {
+        await axios.post(`/update_quantity/${productId}`, { quantity: newQuantity })
+        fetchOrderDetails()
+      } catch (error) {
+        console.error("Error updating quantity:", error)
+      }
+    }
+
     return (
         <div className="App">
             <NavBar />
@@ -42,19 +65,19 @@ function App() {
                 <Route exact path="/">
                     <Banner />
                     <Categories />
-                    <HomePage productsArray = {productsArray} />
+                    <HomePage productsArray = {productsArray} updateCart={updateCart}/>
                 </Route>
                 <Route exact path="/makeup-page">
-                    <MakeupPage productsArray = {productsArray} prodCatArr = {prodCatArr}/>
+                    <MakeupPage productsArray = {productsArray} prodCatArr = {prodCatArr} updateCart={updateCart}/>
                 </Route>
                 <Route exact path="/hair-page">
-                    <HairPage />
+                    <HairPage updateCart={updateCart}/>
                 </Route>
                 <Route exact path="/skin-page">
-                    <SkinPage />
+                    <SkinPage updateCart={updateCart}/>
                 </Route>
                 <Route exact path="/cart">
-                    <Cart />
+                    <Cart orderDetails={orderDetails} fetchOrderDetails={fetchOrderDetails} />
                 </Route>
                 <Route exact path="/register">
                     <Register />
@@ -69,7 +92,7 @@ function App() {
                     <User user = {userProfile}/>
                 </Route>
                 <Route exact path="/product-page">
-                    <ProductPage />
+                    <ProductPage updateCart={updateCart}/>
                 </Route>
             </Switch>
         </div>
