@@ -36,14 +36,18 @@ function ProductCard({ id, name, price, image, brand, updateCart}) {
   }
 
   return (
-    <div className="  hover:bg-gray-200 max-w-xs rounded overflow-hidden shadow-lg bg-white px-6 py-4">
+    <div className="hover:bg-gray-200 max-w-xs rounded overflow-hidden shadow-lg bg-white px-6 py-4">
     <img onClick={renderProdPage} className="w-full" src="https://i.ibb.co/3v4GWST/blush.jpg" alt={name} />
     <div className="">
       <div onClick={renderProdPage} className="font-bold text-xl mb-2">{name}</div>
       <p className="text-gray-700 text-base">{brand}</p>
       <p className="text-gray-700 text-base">${price.toFixed(2)}</p>
       {addedToOrder ? (
-        <p className="text-green-500">Added to Order!</p>
+        <div className="flex flex-col justify-center mt-4">
+          <button className="bg-green-500 rounded px-4 py-2 text-white">
+          Added to Order!
+          </button>
+        </div>
       ) : (
         <div className="flex flex-col justify-center mt-4">
           <button
