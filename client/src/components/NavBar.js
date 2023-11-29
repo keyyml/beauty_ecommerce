@@ -13,10 +13,9 @@ function NavBar() {
             <span className=''><NavLink to="/">Home</NavLink></span>
             <span><NavLink to="/cart">Cart</NavLink></span>
             <span><NavLink to="/login">Login</NavLink></span>
-            <Search />
-            <div className='flex'>
             <span><NavLink to="/register">Register</NavLink></span>
-            </div>
+            <span><NavLink to="/Profile">Profile</NavLink></span>
+            <Search />
             <Logout />
         </span>
     </div>
