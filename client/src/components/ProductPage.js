@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import ReviewCard from "./ReviewCard";
 
-function ProductPage(){
+function ProductPage({ updateCart }){
 
     const [addedToOrder, setAddedToOrder] = useState(false)
     const [quantity, setQuantity] = useState(1)
@@ -15,8 +15,9 @@ function ProductPage(){
 
     const addToOrder = async () => {
         try {
-          await axios.post(`/add_to_order/${prodToRender.id}`)
+          await axios.post(`/add_to_order/${prodToRender.id}`, { quantity: quantity })
           setAddedToOrder(true)
+          updateCart(prodToRender.id, quantity)
         } catch (error) {
           console.error("Error adding product to order:", error)
         }

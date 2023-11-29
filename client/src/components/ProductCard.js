@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ProductPage from "./ProductPage";
 
-function ProductCard({ id, name, price, image, brand }) {
+function ProductCard({ id, name, price, image, brand, updateCart}) {
   const [quantity, setQuantity] = useState(1);
   const [addedToOrder, setAddedToOrder] = useState(false);
   const [prodToRender, setProdToRender] = useState({})
@@ -14,6 +14,7 @@ function ProductCard({ id, name, price, image, brand }) {
     try {
       await axios.post(`/add_to_order/${id}`, { quantity: quantity })
       setAddedToOrder(true)
+      updateCart(id, quantity)
     } catch (error) {
       console.error("Error adding product to order:", error)
     }
