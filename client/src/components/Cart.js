@@ -29,6 +29,9 @@ function Cart({ orderDetails, fetchOrderDetails }) {
       {orderDetails ? (
         <div>
           <p>Order ID: {orderDetails.order_id}</p>
+          <button className="bg-green-500 rounded px-4 py-2 text-white">
+          Checkout!
+          </button>
           <p>Total Price: ${orderDetails.total_price.toFixed(2)}</p>
           <h3>Items:</h3>
           <ul>
