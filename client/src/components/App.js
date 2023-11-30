@@ -17,18 +17,11 @@ import ProductPage from "./ProductPage";
 
 function App() {
 
-    const [userProfile, setUserProfile] = useState({})
     const [productsArray, setProductsArray] = useState([])
     const [prodCatArr, setProdCatArr] = useState([])
     const [orderDetails, setOrderDetails] = useState(null)
+    const [user, setUser] = useState(null)
 
-    useEffect(() => {
-        fetch("/profile")
-        .then (resp => resp.json())
-        .then ((data) => setUserProfile(data))
-    }, [])
-
-    console.log(userProfile)
 
     useEffect(() => {
         fetch("/products")
@@ -39,7 +32,11 @@ function App() {
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get("/checkout")
-        setOrderDetails(response.data)
+        if (response.data.message === "NO user") {
+            setOrderDetails(null)
+        } else {
+            setOrderDetails(response.data)
+        }
       } catch (error) {
         console.error("Error fetching order details:", error)
       }
@@ -47,6 +44,24 @@ function App() {
   
     useEffect(() => {
       fetchOrderDetails();
+    }, []);
+
+
+    useEffect(() => {
+      const getUser = async () => {
+        try {
+          const response = await axios.get("/profile")
+          if (response.data.message === "NO user") {
+            setUser(null)
+          } else {
+            setUser(response.data)
+          }
+        } catch (error) {
+          console.error("Error fetching:", error)
+        }
+      }
+  
+      getUser();
     }, []);
   
     const updateCart = async (productId, newQuantity) => {
@@ -65,19 +80,19 @@ function App() {
                 <Route exact path="/">
                     <Banner />
                     <Categories />
-                    <HomePage productsArray = {productsArray} updateCart={updateCart}/>
+                    <HomePage productsArray = {productsArray} updateCart={updateCart} user={ user }/>
                 </Route>
                 <Route exact path="/makeup-page">
-                    <MakeupPage productsArray = {productsArray} prodCatArr = {prodCatArr} updateCart={updateCart}/>
+                    <MakeupPage productsArray = {productsArray} prodCatArr = {prodCatArr} updateCart={updateCart} user={ user }/>
                 </Route>
                 <Route exact path="/hair-page">
-                    <HairPage updateCart={updateCart}/>
+                    <HairPage updateCart={updateCart} user={ user }/>
                 </Route>
                 <Route exact path="/skin-page">
                     <SkinPage updateCart={updateCart}/>
                 </Route>
                 <Route exact path="/cart">
-                    <Cart orderDetails={orderDetails} fetchOrderDetails={fetchOrderDetails} />
+                    <Cart orderDetails={orderDetails} fetchOrderDetails={fetchOrderDetails} user={ user } />
                 </Route>
                 <Route exact path="/register">
                     <Register />
@@ -89,10 +104,10 @@ function App() {
                     <Logout />
                 </Route>
                 <Route exact path="/profile">
-                    <User user = {userProfile}/>
+                    <User user={ user }/>
                 </Route>
                 <Route exact path="/product-page">
-                    <ProductPage updateCart={updateCart}/>
+                    <ProductPage updateCart={updateCart} user={ user }/>
                 </Route>
             </Switch>
         </div>

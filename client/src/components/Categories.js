@@ -53,10 +53,10 @@ function Categories(){
 
 
     return(
-        <div className= "flex justify-evenly space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
-            <button onClick={handleMClick}>Makeup</button>
-            <button onClick={handleSClick}>Skin Care</button>
-            <button onClick={handleHClick}>Hair Care</button>
+        <div className= "mt-8 flex justify-evenly space-x-2 text-4xl text-pinky">
+            <button className="bg-black hover:bg-zinc-700 rounded px-6 py-4 w-64" onClick={handleMClick}>Makeup</button>
+            <button className="bg-black hover:bg-zinc-700 rounded px-6 py-4 w-64" onClick={handleSClick}>Skin Care</button>
+            <button className="bg-black hover:bg-zinc-700 rounded px-6 py-4 w-64" onClick={handleHClick}>Hair Care</button>
         </div>  
     )
 }

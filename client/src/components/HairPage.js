@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 
-function HairPage({updateCart}){
+function HairPage({updateCart, user}){
 
     const [prodsArr, setProdsArr] = useState([]);
 
@@ -23,15 +23,21 @@ function HairPage({updateCart}){
 
     const prodsToDisplay = prodsArr.map((product) => {
         return(
-            <ProductCard key={product.id} {...product} updateCart={updateCart} />
+            <ProductCard key={product.id} {...product} updateCart={updateCart} user={ user }/>
         )
     })
 
     return(
-        <>
-            <h1>Hair Care Products</h1>
-            {prodsToDisplay}
-        </>
+      <>
+      <div className="flex flex-row justify-center mt-8">
+          <h1 className="text-6xl font-bold">Hair Care</h1>
+      </div>
+      <div className="container mx-auto mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+           {prodsToDisplay}
+        </div>
+      </div>
+    </>
     )
 }
 

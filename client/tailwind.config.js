@@ -29,6 +29,8 @@ module.exports = {
     extend: {
       colors: {
         trueGray: colors.neutral,
+        pinky: '#f8d3db',
+        darkPinky: '#E474AF'
       },
     },
     fontFamily: {

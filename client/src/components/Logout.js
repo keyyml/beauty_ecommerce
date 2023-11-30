@@ -22,8 +22,8 @@ function Logout() {
   }
 
   return (
-    <div>
-      <button onClick={handleLogout}>Logout</button>
+    <div >
+      <button className="rounded px-6 py-4 mt-6 hover:bg-zinc-700" onClick={handleLogout}>Logout</button>
     </div>
   )
 

@@ -78,10 +78,6 @@ def logout():
         return jsonify(message="Logout unavailable")
     
     
-from flask import jsonify
-
-# ...
-
 @app.route('/add_to_order/<int:product_id>', methods=['POST'])
 @login_required
 def add_to_order(product_id):

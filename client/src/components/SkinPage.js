@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import axios from "axios";
 
 
-function SkinPage({updateCart}){
+function SkinPage({updateCart, user}){
 
     const [prodsArr, setProdsArr] = useState([]);
 
@@ -24,15 +24,21 @@ function SkinPage({updateCart}){
 
     const prodsToDisplay = prodsArr.map((product) => {
         return(
-            <ProductCard key={product.id} {...product} updateCart={updateCart}/>
+            <ProductCard key={product.id} {...product} updateCart={updateCart} user={ user }/>
         )
     })
 
     return(
-        <>
-            <h1>Skin Care Products</h1>
-            {prodsToDisplay}
-        </>
+      <>
+      <div className="flex flex-row justify-center mt-8">
+          <h1 className="text-6xl font-bold" >Skin Care</h1>
+      </div>
+      <div className="container mx-auto mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+           {prodsToDisplay}
+        </div>
+      </div>
+    </>
     )
 }
 

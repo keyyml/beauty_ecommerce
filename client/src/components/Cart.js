@@ -25,7 +25,7 @@ function Cart({ orderDetails, fetchOrderDetails }) {
 
   return (
     <div>
-      <h2>Your Cart</h2>
+      <h2>Cart</h2>
       {orderDetails ? (
         <div>
           <p>Order ID: {orderDetails.order_id}</p>
@@ -37,7 +37,7 @@ function Cart({ orderDetails, fetchOrderDetails }) {
           <ul>
             {orderDetails.items.map((item) => (
               <li key={item.product.id}>
-                {item.product.name} - ${(item.product.price.toFixed(2) * item.quantity).toFixed(2)} 
+                {item.product.name} - ${(item.product.price.toFixed(2) * item.quantity)} 
                 <input
                   type="number"
                   id="quantity"
@@ -51,7 +51,7 @@ function Cart({ orderDetails, fetchOrderDetails }) {
           </ul>
         </div>
       ) : (
-        <p>Loading your cart...</p>
+        <p>LOADING...</p>
       )}
     </div>
   );

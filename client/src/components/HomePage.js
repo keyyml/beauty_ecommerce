@@ -2,12 +2,12 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import Banner from "./Banner";
 
-function HomePage({ productsArray, updateCart }) {
+function HomePage({ productsArray, updateCart, user }) {
 
     // console.log(productsArray)
     const productsToDisplay = productsArray.map((product) => {
         return(
-            <ProductCard key={product.id} {...product} updateCart={updateCart} />
+            <ProductCard key={product.id} {...product} updateCart={updateCart} user={ user } />
         )
     })
 
